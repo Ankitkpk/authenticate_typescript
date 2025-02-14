@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/config/db.ts","./src/controller/admincontroller.ts","./src/lib/hashedpassword.ts","./src/lib/token.ts","./src/middleware/authuser.ts","./src/model/adminmodel.ts","./src/model/doctormodel.ts","./src/model/patientmodel.ts","./src/model/receptionistmodel.ts","./src/routes/adminroutes.ts","./src/service/admin.ts"],"version":"5.7.3"}
