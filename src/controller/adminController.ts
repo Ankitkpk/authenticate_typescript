@@ -32,6 +32,8 @@ export const signupAdmin = async(req: Request, res: Response): Promise<any> =>{
 }
 
 
+
+
 export const loginAdmin = async (req: Request, res: Response): Promise<any> => {
     try {
         const { email, password } = req.body;
@@ -59,18 +61,29 @@ export const loginAdmin = async (req: Request, res: Response): Promise<any> => {
 
         resetLoginAttempts(email);
 
-        const token = createToken({ email });
+        const token = createToken({ email, role: admin.role });
+
+       
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
+        });
+
+       
 
         return res.status(200).json({
+            success: true,
             message: "Login Successful",
             admin: admin,
-            token: token
         });
 
     } catch (error: any) {
         return res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };
+
 
 
 export const forgetPassword = async(req: Request, res: Response): Promise<any> =>{
